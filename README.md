@@ -37,6 +37,6 @@ O projeto inclui diversos arquivos de resultados:
    ```
 5. Para executar a aplicação Streamlit:
    ```bash
-   pip install -r requirements_streamlit.txt
+   pip install -r requirements.txt
    streamlit run mda.py
    ```
