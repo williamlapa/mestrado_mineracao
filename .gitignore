@@ -2,6 +2,8 @@
 venv/
 env/
 ENV/
+mda/
+
 
 # Python
 __pycache__/
