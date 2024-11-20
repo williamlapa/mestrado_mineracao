@@ -1,7 +1,6 @@
 ﻿streamlit
 pandas
 numpy
-scikit-learn==1.4.0
 xgboost==2.0.3
 lightgbm==4.3.0
 imbalanced-learn==0.12.0
