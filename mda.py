@@ -14,6 +14,15 @@ st.set_page_config(
 # Title
 st.title("Análise de Classificadores de Machine Learning")
 
+# Authors information
+st.sidebar.markdown("""
+### Autores
+- Fagner Fernandes
+  - [LinkedIn](linkedin.com/in/fagner-fernandes-38a25a3b)
+- William Lapa Santos Filho
+  - [LinkedIn](www.linkedin.com/in/william-lapa)
+""")
+
 # Sidebar menu
 menu = st.sidebar.selectbox(
     "Menu",

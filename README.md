@@ -40,3 +40,10 @@ O projeto inclui diversos arquivos de resultados:
    pip install -r requirements.txt
    streamlit run mda.py
    ```
+
+## Autores
+
+- Fagner Fernandes
+  - LinkedIn: [Fagner Fernandes](linkedin.com/in/fagner-fernandes-38a25a3b)
+- William Lapa Santos Filho
+  - LinkedIn: [William Lapa](www.linkedin.com/in/william-lapa)
