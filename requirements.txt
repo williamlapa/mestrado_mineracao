@@ -26,7 +26,6 @@ pyparsing==3.2.0
 python-dateutil==2.9.0.post0
 python-utils==3.9.0
 pytz==2024.2
-pywin32
 PyYAML==6.0.2
 pyzmq==26.2.0
 requests==2.32.3
