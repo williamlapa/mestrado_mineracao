@@ -1,0 +1,35 @@
+Classificadores com os melhores parâmetros:
+KNN: KNeighborsClassifier(n_neighbors=1, p=1)
+SVM: SVC(probability=True)
+Decision Tree: DecisionTreeClassifier(criterion='entropy', max_depth=36)
+LVQ: MLPClassifier(learning_rate_init=0.1, max_iter=100, solver='sgd')
+MLP: MLPClassifier(hidden_layer_sizes=(50,), max_iter=100)
+Ensemble Neural Network: VotingClassifier(estimators=[('mlp_relu',
+                              MLPClassifier(hidden_layer_sizes=(50, 20),
+                                            max_iter=100)),
+                             ('mlp_tanh',
+                              MLPClassifier(activation='tanh',
+                                            hidden_layer_sizes=(50, 20),
+                                            max_iter=100)),
+                             ('mlp_logistic',
+                              MLPClassifier(activation='logistic',
+                                            hidden_layer_sizes=(50, 20),
+                                            max_iter=100))],
+                 n_jobs=-1, voting='soft')
+Stacking: StackingClassifier(estimators=[('nb', GaussianNB()),
+                               ('dt', DecisionTreeClassifier(max_depth=3))],
+                   final_estimator=LogisticRegression(), n_jobs=-1)
+Random Forest: RandomForestClassifier(max_depth=28, n_estimators=97)
+XGBoost: XGBClassifier(base_score=None, booster=None, callbacks=None,
+              colsample_bylevel=None, colsample_bynode=None,
+              colsample_bytree=None, device=None, early_stopping_rounds=None,
+              enable_categorical=False, eval_metric='logloss',
+              feature_types=None, gamma=None, grow_policy=None,
+              importance_type=None, interaction_constraints=None,
+              learning_rate=0.09504317284612004, max_bin=None,
+              max_cat_threshold=None, max_cat_to_onehot=None,
+              max_delta_step=None, max_depth=6, max_leaves=None,
+              min_child_weight=None, missing=nan, monotone_constraints=None,
+              multi_strategy=None, n_estimators=188, n_jobs=None,
+              num_parallel_tree=None, random_state=None, ...)
+LightGBM: LGBMClassifier(max_depth=3, n_estimators=50)
