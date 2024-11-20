@@ -4,15 +4,13 @@ Este projeto contém códigos e análises relacionados ao projeto de mestrado em
 
 ## Estrutura do Projeto
 
-- `app.py`: Aplicação principal
-- `mda.py`: Módulo de análise de dados
+- `mda.py`: Comparativo de classificadores
 - `requirements.txt`: Dependências do projeto
 - `requirements_streamlit.txt`: Dependências específicas para Streamlit
 
 ## Notebooks
 
-- `Friedman_analysis.ipynb`: Análise estatística usando teste de Friedman
-- `notebook_estatistica.ipynb`: Análises estatísticas gerais
+- `notebook_estatistica.ipynb`: Análises estatísticas gerais (Friedman e Niemenyi)
 - `notebook_experimento.ipynb`: Notebooks de experimentos
 
 ## Resultados
@@ -40,5 +38,5 @@ O projeto inclui diversos arquivos de resultados:
 5. Para executar a aplicação Streamlit:
    ```bash
    pip install -r requirements_streamlit.txt
-   streamlit run app.py
+   streamlit run mda.py
    ```
