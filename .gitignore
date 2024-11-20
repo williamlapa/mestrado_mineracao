@@ -2,7 +2,7 @@
 venv/
 env/
 ENV/
-mda/
+.mda
 
 
 # Python
@@ -38,6 +38,7 @@ wheels/
 
 # Environment variables
 .env
+.mda
 
 # System Files
 .DS_Store
