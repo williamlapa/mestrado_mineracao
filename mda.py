@@ -315,30 +315,13 @@ elif menu == "Análise de Custo x Benefício":
             plt.title('Uso de Memória por Classificador')
             plt.xlabel('Memória (MB)')
             plt.ylabel('Classificador')
-            st.pyplot(fig_memory)
-        
-        # Análise de correlação entre métricas
-        st.subheader("Correlação entre Métricas de Custo e Desempenho")
-        
-        # Calcular correlações
-        correlation_metrics = cost_benefit_df[['Tempo de Treinamento (s)', 'Uso de Memória (MB)', 
-                                             'Accuracy', 'F1 Score', 'Recall', 'ACSA']].corr()
-        
-        # Plotar mapa de calor das correlações
-        fig_corr = plt.figure(figsize=(10, 8))
-        sns.heatmap(correlation_metrics, annot=True, cmap='coolwarm', center=0, fmt='.2f')
-        plt.title('Correlação entre Métricas')
-        st.pyplot(fig_corr)
-        
+            st.pyplot(fig_memory)      
+                
         # Adicionar algumas observações
         st.subheader("Observações")
         st.markdown("""
         - Os valores em verde na tabela indicam os melhores resultados para métricas de desempenho (Accuracy, F1 Score, Recall, ACSA)
         - Os valores em rosa na tabela indicam os menores valores para métricas de custo (Tempo de Treinamento, Uso de Memória)
-        - O mapa de calor mostra a correlação entre as métricas, onde:
-            - Valores próximos a 1 indicam forte correlação positiva
-            - Valores próximos a -1 indicam forte correlação negativa
-            - Valores próximos a 0 indicam pouca ou nenhuma correlação
         """)
         
     except Exception as e:
