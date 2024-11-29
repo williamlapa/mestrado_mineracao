@@ -26,7 +26,7 @@ st.sidebar.markdown("""
 # Sidebar menu
 menu = st.sidebar.selectbox(
     "Menu",
-    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Downloads"]
+    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento de classes após ADASYN", "Downloads"]
 )
 
 # Load data
@@ -326,6 +326,14 @@ elif menu == "Análise de Custo x Benefício":
         
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {str(e)}")
+
+elif menu == "Balanceamento de classes após ADASYN":
+    st.header("Distribuição das Classes após Balanceamento com ADASYN")
+    
+    try:
+        st.image("class_distribution.jpeg", caption="Distribuição das classes após aplicação do ADASYN")
+    except Exception as e:
+        st.error(f"Erro ao carregar a imagem: {str(e)}")
 
 elif menu == "Downloads":
     st.header("Downloads dos Notebooks")
