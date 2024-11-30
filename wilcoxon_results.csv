@@ -1,0 +1,181 @@
+,Statistic,P-value
+Accuracy_KNN_vs_SVM,0.0,0.001953125
+Accuracy_KNN_vs_Decision Tree,0.0,0.001953125
+Accuracy_KNN_vs_LVQ,0.0,0.001953125
+Accuracy_KNN_vs_MLP,0.0,0.001953125
+Accuracy_KNN_vs_Ensemble Neural Network,0.0,0.001953125
+Accuracy_KNN_vs_Stacking,0.0,0.001953125
+Accuracy_KNN_vs_Random Forest,0.0,0.001953125
+Accuracy_KNN_vs_XGBoost,0.0,0.001953125
+Accuracy_KNN_vs_LightGBM,0.0,0.001953125
+Accuracy_SVM_vs_Decision Tree,0.0,0.001953125
+Accuracy_SVM_vs_LVQ,0.0,0.001953125
+Accuracy_SVM_vs_MLP,0.0,0.001953125
+Accuracy_SVM_vs_Ensemble Neural Network,0.0,0.001953125
+Accuracy_SVM_vs_Stacking,0.0,0.001953125
+Accuracy_SVM_vs_Random Forest,0.0,0.001953125
+Accuracy_SVM_vs_XGBoost,0.0,0.001953125
+Accuracy_SVM_vs_LightGBM,0.0,0.001953125
+Accuracy_Decision Tree_vs_LVQ,0.0,0.001953125
+Accuracy_Decision Tree_vs_MLP,0.0,0.001953125
+Accuracy_Decision Tree_vs_Ensemble Neural Network,0.0,0.001953125
+Accuracy_Decision Tree_vs_Stacking,0.0,0.001953125
+Accuracy_Decision Tree_vs_Random Forest,0.0,0.001953125
+Accuracy_Decision Tree_vs_XGBoost,0.0,0.001953125
+Accuracy_Decision Tree_vs_LightGBM,0.0,0.001953125
+Accuracy_LVQ_vs_MLP,0.0,0.001953125
+Accuracy_LVQ_vs_Ensemble Neural Network,6.0,0.02734375
+Accuracy_LVQ_vs_Stacking,0.0,0.001953125
+Accuracy_LVQ_vs_Random Forest,0.0,0.001953125
+Accuracy_LVQ_vs_XGBoost,1.0,0.00390625
+Accuracy_LVQ_vs_LightGBM,0.0,0.001953125
+Accuracy_MLP_vs_Ensemble Neural Network,0.0,0.001953125
+Accuracy_MLP_vs_Stacking,0.0,0.001953125
+Accuracy_MLP_vs_Random Forest,17.0,0.322265625
+Accuracy_MLP_vs_XGBoost,3.0,0.009765625
+Accuracy_MLP_vs_LightGBM,0.0,0.001953125
+Accuracy_Ensemble Neural Network_vs_Stacking,0.0,0.001953125
+Accuracy_Ensemble Neural Network_vs_Random Forest,0.0,0.001953125
+Accuracy_Ensemble Neural Network_vs_XGBoost,0.0,0.001953125
+Accuracy_Ensemble Neural Network_vs_LightGBM,0.0,0.001953125
+Accuracy_Stacking_vs_Random Forest,0.0,0.001953125
+Accuracy_Stacking_vs_XGBoost,0.0,0.001953125
+Accuracy_Stacking_vs_LightGBM,0.0,0.001953125
+Accuracy_Random Forest_vs_XGBoost,7.0,0.037109375
+Accuracy_Random Forest_vs_LightGBM,0.0,0.001953125
+Accuracy_XGBoost_vs_LightGBM,0.0,0.001953125
+F1 Score_KNN_vs_SVM,0.0,0.001953125
+F1 Score_KNN_vs_Decision Tree,0.0,0.001953125
+F1 Score_KNN_vs_LVQ,0.0,0.001953125
+F1 Score_KNN_vs_MLP,0.0,0.001953125
+F1 Score_KNN_vs_Ensemble Neural Network,0.0,0.001953125
+F1 Score_KNN_vs_Stacking,0.0,0.001953125
+F1 Score_KNN_vs_Random Forest,0.0,0.001953125
+F1 Score_KNN_vs_XGBoost,0.0,0.001953125
+F1 Score_KNN_vs_LightGBM,0.0,0.001953125
+F1 Score_SVM_vs_Decision Tree,0.0,0.001953125
+F1 Score_SVM_vs_LVQ,0.0,0.001953125
+F1 Score_SVM_vs_MLP,0.0,0.001953125
+F1 Score_SVM_vs_Ensemble Neural Network,0.0,0.001953125
+F1 Score_SVM_vs_Stacking,0.0,0.001953125
+F1 Score_SVM_vs_Random Forest,0.0,0.001953125
+F1 Score_SVM_vs_XGBoost,0.0,0.001953125
+F1 Score_SVM_vs_LightGBM,0.0,0.001953125
+F1 Score_Decision Tree_vs_LVQ,0.0,0.001953125
+F1 Score_Decision Tree_vs_MLP,0.0,0.001953125
+F1 Score_Decision Tree_vs_Ensemble Neural Network,0.0,0.001953125
+F1 Score_Decision Tree_vs_Stacking,0.0,0.001953125
+F1 Score_Decision Tree_vs_Random Forest,0.0,0.001953125
+F1 Score_Decision Tree_vs_XGBoost,0.0,0.001953125
+F1 Score_Decision Tree_vs_LightGBM,0.0,0.001953125
+F1 Score_LVQ_vs_MLP,0.0,0.001953125
+F1 Score_LVQ_vs_Ensemble Neural Network,6.0,0.02734375
+F1 Score_LVQ_vs_Stacking,0.0,0.001953125
+F1 Score_LVQ_vs_Random Forest,0.0,0.001953125
+F1 Score_LVQ_vs_XGBoost,1.0,0.00390625
+F1 Score_LVQ_vs_LightGBM,0.0,0.001953125
+F1 Score_MLP_vs_Ensemble Neural Network,0.0,0.001953125
+F1 Score_MLP_vs_Stacking,0.0,0.001953125
+F1 Score_MLP_vs_Random Forest,17.0,0.322265625
+F1 Score_MLP_vs_XGBoost,3.0,0.009765625
+F1 Score_MLP_vs_LightGBM,0.0,0.001953125
+F1 Score_Ensemble Neural Network_vs_Stacking,0.0,0.001953125
+F1 Score_Ensemble Neural Network_vs_Random Forest,0.0,0.001953125
+F1 Score_Ensemble Neural Network_vs_XGBoost,0.0,0.001953125
+F1 Score_Ensemble Neural Network_vs_LightGBM,0.0,0.001953125
+F1 Score_Stacking_vs_Random Forest,0.0,0.001953125
+F1 Score_Stacking_vs_XGBoost,0.0,0.001953125
+F1 Score_Stacking_vs_LightGBM,0.0,0.001953125
+F1 Score_Random Forest_vs_XGBoost,7.0,0.037109375
+F1 Score_Random Forest_vs_LightGBM,0.0,0.001953125
+F1 Score_XGBoost_vs_LightGBM,0.0,0.001953125
+Recall_KNN_vs_SVM,0.0,0.001953125
+Recall_KNN_vs_Decision Tree,0.0,0.001953125
+Recall_KNN_vs_LVQ,0.0,0.001953125
+Recall_KNN_vs_MLP,0.0,0.001953125
+Recall_KNN_vs_Ensemble Neural Network,0.0,0.001953125
+Recall_KNN_vs_Stacking,0.0,0.001953125
+Recall_KNN_vs_Random Forest,0.0,0.001953125
+Recall_KNN_vs_XGBoost,0.0,0.001953125
+Recall_KNN_vs_LightGBM,0.0,0.001953125
+Recall_SVM_vs_Decision Tree,0.0,0.001953125
+Recall_SVM_vs_LVQ,0.0,0.001953125
+Recall_SVM_vs_MLP,0.0,0.001953125
+Recall_SVM_vs_Ensemble Neural Network,0.0,0.001953125
+Recall_SVM_vs_Stacking,0.0,0.001953125
+Recall_SVM_vs_Random Forest,0.0,0.001953125
+Recall_SVM_vs_XGBoost,0.0,0.001953125
+Recall_SVM_vs_LightGBM,0.0,0.001953125
+Recall_Decision Tree_vs_LVQ,0.0,0.001953125
+Recall_Decision Tree_vs_MLP,5.0,0.01953125
+Recall_Decision Tree_vs_Ensemble Neural Network,0.0,0.001953125
+Recall_Decision Tree_vs_Stacking,0.0,0.001953125
+Recall_Decision Tree_vs_Random Forest,0.0,0.001953125
+Recall_Decision Tree_vs_XGBoost,0.0,0.001953125
+Recall_Decision Tree_vs_LightGBM,0.0,0.001953125
+Recall_LVQ_vs_MLP,0.0,0.001953125
+Recall_LVQ_vs_Ensemble Neural Network,22.0,0.625
+Recall_LVQ_vs_Stacking,0.0,0.001953125
+Recall_LVQ_vs_Random Forest,0.0,0.001953125
+Recall_LVQ_vs_XGBoost,0.0,0.001953125
+Recall_LVQ_vs_LightGBM,0.0,0.001953125
+Recall_MLP_vs_Ensemble Neural Network,0.0,0.001953125
+Recall_MLP_vs_Stacking,0.0,0.001953125
+Recall_MLP_vs_Random Forest,6.0,0.02734375
+Recall_MLP_vs_XGBoost,0.0,0.001953125
+Recall_MLP_vs_LightGBM,0.0,0.001953125
+Recall_Ensemble Neural Network_vs_Stacking,0.0,0.001953125
+Recall_Ensemble Neural Network_vs_Random Forest,0.0,0.001953125
+Recall_Ensemble Neural Network_vs_XGBoost,0.0,0.001953125
+Recall_Ensemble Neural Network_vs_LightGBM,0.0,0.001953125
+Recall_Stacking_vs_Random Forest,0.0,0.001953125
+Recall_Stacking_vs_XGBoost,0.0,0.001953125
+Recall_Stacking_vs_LightGBM,17.0,0.322265625
+Recall_Random Forest_vs_XGBoost,7.0,0.037109375
+Recall_Random Forest_vs_LightGBM,0.0,0.001953125
+Recall_XGBoost_vs_LightGBM,0.0,0.001953125
+ACSA_KNN_vs_SVM,0.0,0.001953125
+ACSA_KNN_vs_Decision Tree,0.0,0.001953125
+ACSA_KNN_vs_LVQ,10.0,0.083984375
+ACSA_KNN_vs_MLP,0.0,0.001953125
+ACSA_KNN_vs_Ensemble Neural Network,12.0,0.130859375
+ACSA_KNN_vs_Stacking,0.0,0.001953125
+ACSA_KNN_vs_Random Forest,0.0,0.001953125
+ACSA_KNN_vs_XGBoost,10.0,0.083984375
+ACSA_KNN_vs_LightGBM,0.0,0.001953125
+ACSA_SVM_vs_Decision Tree,0.0,0.001953125
+ACSA_SVM_vs_LVQ,0.0,0.001953125
+ACSA_SVM_vs_MLP,0.0,0.001953125
+ACSA_SVM_vs_Ensemble Neural Network,0.0,0.001953125
+ACSA_SVM_vs_Stacking,0.0,0.001953125
+ACSA_SVM_vs_Random Forest,0.0,0.001953125
+ACSA_SVM_vs_XGBoost,0.0,0.001953125
+ACSA_SVM_vs_LightGBM,0.0,0.001953125
+ACSA_Decision Tree_vs_LVQ,1.0,0.00390625
+ACSA_Decision Tree_vs_MLP,0.0,0.001953125
+ACSA_Decision Tree_vs_Ensemble Neural Network,2.0,0.005859375
+ACSA_Decision Tree_vs_Stacking,0.0,0.001953125
+ACSA_Decision Tree_vs_Random Forest,1.0,0.00390625
+ACSA_Decision Tree_vs_XGBoost,9.0,0.064453125
+ACSA_Decision Tree_vs_LightGBM,0.0,0.001953125
+ACSA_LVQ_vs_MLP,0.0,0.001953125
+ACSA_LVQ_vs_Ensemble Neural Network,2.0,0.005859375
+ACSA_LVQ_vs_Stacking,0.0,0.001953125
+ACSA_LVQ_vs_Random Forest,0.0,0.001953125
+ACSA_LVQ_vs_XGBoost,1.0,0.00390625
+ACSA_LVQ_vs_LightGBM,0.0,0.001953125
+ACSA_MLP_vs_Ensemble Neural Network,0.0,0.001953125
+ACSA_MLP_vs_Stacking,0.0,0.001953125
+ACSA_MLP_vs_Random Forest,0.0,0.001953125
+ACSA_MLP_vs_XGBoost,0.0,0.001953125
+ACSA_MLP_vs_LightGBM,0.0,0.001953125
+ACSA_Ensemble Neural Network_vs_Stacking,0.0,0.001953125
+ACSA_Ensemble Neural Network_vs_Random Forest,0.0,0.001953125
+ACSA_Ensemble Neural Network_vs_XGBoost,15.0,0.232421875
+ACSA_Ensemble Neural Network_vs_LightGBM,0.0,0.001953125
+ACSA_Stacking_vs_Random Forest,0.0,0.001953125
+ACSA_Stacking_vs_XGBoost,0.0,0.001953125
+ACSA_Stacking_vs_LightGBM,0.0,0.001953125
+ACSA_Random Forest_vs_XGBoost,0.0,0.001953125
+ACSA_Random Forest_vs_LightGBM,0.0,0.001953125
+ACSA_XGBoost_vs_LightGBM,0.0,0.001953125

@@ -26,7 +26,7 @@ st.sidebar.markdown("""
 # Sidebar menu
 menu = st.sidebar.selectbox(
     "Menu",
-    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento de classes após ADASYN", "Downloads"]
+    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento de classes após ADASYN", "Resultados dos classificadores após ADASYN", "Base Treino x Teste", "Downloads"]
 )
 
 # Load data
@@ -38,7 +38,9 @@ def load_data():
     nemenyi_recall = pd.read_csv('nemenyi_results_Recall.csv', index_col=0)
     nemenyi_acsa = pd.read_csv('nemenyi_results_ACSA.csv', index_col=0)
     performance_metrics = pd.read_excel('results_with_cost_benefit.xlsx')
-    return friedman_results, nemenyi_accuracy, nemenyi_f1, nemenyi_recall, nemenyi_acsa, performance_metrics
+    adasyn_results = pd.read_excel('results_adasyn_comparison.xlsx')
+    train_test_results = pd.read_excel('results_train_teste_comparison.xlsx')
+    return friedman_results, nemenyi_accuracy, nemenyi_f1, nemenyi_recall, nemenyi_acsa, performance_metrics, adasyn_results, train_test_results
 
 # Function to create heatmap
 def plot_heatmap(data, title):
@@ -52,7 +54,7 @@ if menu == "Análise Estatística":
     
     try:
         # Load data
-        friedman_results, nemenyi_accuracy, nemenyi_f1, nemenyi_recall, nemenyi_acsa, _ = load_data()
+        friedman_results, nemenyi_accuracy, nemenyi_f1, nemenyi_recall, nemenyi_acsa, _, _, _ = load_data()
         
         # Display Friedman results with full P-value precision
         st.subheader("Resultados do Teste de Friedman")
@@ -88,7 +90,7 @@ elif menu == "Parâmetros dos Classificadores":
     
     try:
         # Load performance metrics
-        _, _, _, _, _, performance_metrics = load_data()
+        _, _, _, _, _, performance_metrics, _, _ = load_data()
         
         # Dictionary with classifier parameters and optimization info
         classifiers = {
@@ -275,7 +277,7 @@ elif menu == "Análise de Custo x Benefício":
     
     try:
         # Load performance metrics
-        _, _, _, _, _, performance_metrics = load_data()
+        _, _, _, _, _, performance_metrics, _, _ = load_data()
         
         # Criar DataFrame com métricas de desempenho
         cost_benefit_df = pd.DataFrame({
@@ -334,6 +336,32 @@ elif menu == "Balanceamento de classes após ADASYN":
         st.image("class_distribution.jpeg", caption="Distribuição das classes após aplicação do ADASYN")
     except Exception as e:
         st.error(f"Erro ao carregar a imagem: {str(e)}")
+
+elif menu == "Resultados dos classificadores após ADASYN":
+    st.header("Resultados dos Classificadores após Aplicação do ADASYN")
+    
+    try:
+        # Load ADASYN results
+        _, _, _, _, _, _, adasyn_results, _ = load_data()
+        
+        # Display the results
+        st.dataframe(adasyn_results)
+            
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados do ADASYN: {str(e)}")
+
+elif menu == "Base Treino x Teste":
+    st.header("Comparação entre Base de Treino e Teste")
+    
+    try:
+        # Load train-test comparison results
+        _, _, _, _, _, _, _, train_test_results = load_data()
+        
+        # Display the results
+        st.dataframe(train_test_results)
+            
+    except Exception as e:
+        st.error(f"Erro ao carregar os dados de comparação treino-teste: {str(e)}")
 
 elif menu == "Downloads":
     st.header("Downloads dos Notebooks")
