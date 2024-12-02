@@ -12,9 +12,12 @@ st.set_page_config(
 )
 
 # Title
+st.markdown("<h1 style='text-align: center;'>Mineração de Dados</h1>", unsafe_allow_html=True)
 st.title("Análise de Classificadores de Machine Learning")
 
 # Authors information
+st.sidebar.image("cin.png", use_column_width=True)
+
 st.sidebar.markdown("""
 ### Autores
 - Fagner Fernandes
@@ -26,8 +29,13 @@ st.sidebar.markdown("""
 # Sidebar menu
 menu = st.sidebar.selectbox(
     "Menu",
-    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento de classes após ADASYN", "Resultados dos classificadores após ADASYN", "Base Treino x Teste", "Downloads"]
+    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento classes ADASYN", "Base Treino x Teste", "Explainable AI", "Downloads"]
 )
+
+# Add development information
+st.sidebar.markdown("""
+Aplicativo desenvolvido em Dezembro de 2024 como produto dos estudos realizados na disciplina **Mineração de Dados**
+""")
 
 # Load data
 @st.cache_data
@@ -329,26 +337,30 @@ elif menu == "Análise de Custo x Benefício":
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {str(e)}")
 
-elif menu == "Balanceamento de classes após ADASYN":
-    st.header("Distribuição das Classes após Balanceamento com ADASYN")
-    
-    try:
-        st.image("class_distribution.jpeg", caption="Distribuição das classes após aplicação do ADASYN")
-    except Exception as e:
-        st.error(f"Erro ao carregar a imagem: {str(e)}")
-
-elif menu == "Resultados dos classificadores após ADASYN":
-    st.header("Resultados dos Classificadores após Aplicação do ADASYN")
+elif menu == "Balanceamento classes ADASYN":
+    st.header("Balanceamento de Classes usando ADASYN")
     
     try:
         # Load ADASYN results
         _, _, _, _, _, _, adasyn_results, _ = load_data()
         
-        # Display the results
-        st.dataframe(adasyn_results)
+        tab1, tab2 = st.tabs(["Distribuição de Classes", "Resultados"])
+        
+        with tab1:
+            st.subheader("Distribuição de Classes")
+            st.image("class_distribution.png", caption="Distribuição de Classes antes e depois do ADASYN", use_column_width=True)
             
+        with tab2:
+            st.subheader("Resultados após ADASYN")
+            
+            # Display the results dataframe
+            if not adasyn_results.empty:
+                st.dataframe(adasyn_results, use_container_width=True)
+            else:
+                st.error("Não foi possível carregar os resultados do ADASYN.")
+                
     except Exception as e:
-        st.error(f"Erro ao carregar os dados do ADASYN: {str(e)}")
+        st.error(f"Erro ao carregar os dados: {str(e)}")
 
 elif menu == "Base Treino x Teste":
     st.header("Comparação entre Base de Treino e Teste")
@@ -362,6 +374,42 @@ elif menu == "Base Treino x Teste":
             
     except Exception as e:
         st.error(f"Erro ao carregar os dados de comparação treino-teste: {str(e)}")
+
+elif menu == "Explainable AI":
+    st.header("Explainable AI - LIME Results")
+    
+    tab1, tab2 = st.tabs(["KNN", "XGBoost"])
+    
+    with tab1:
+        st.subheader("LIME Results for KNN")
+        
+        # Display KNN parameters
+        st.markdown("### KNN Parameters")
+        st.markdown("""
+        - n_neighbors: 1
+        - weights: uniform
+        - p: 1 (Manhattan distance)
+        """)
+        
+        # Display LIME results image
+        st.image("lime_results_knn.png", caption="LIME Results for KNN", use_column_width=True)
+        
+    with tab2:
+        st.subheader("LIME Results for XGBoost")
+        
+        # Display XGBoost parameters
+        st.markdown("### XGBoost Parameters")
+        st.markdown("""
+        - objective: binary:logistic
+        - enable_categorical: False
+        - eval_metric: logloss
+        - learning_rate: 0.09504
+        - max_depth: 6
+        - n_estimators: 188
+        """)
+        
+        # Display LIME results image
+        st.image("lime_results_xgboost.png", caption="LIME Results for XGBoost", use_column_width=True)
 
 elif menu == "Downloads":
     st.header("Downloads dos Notebooks")
