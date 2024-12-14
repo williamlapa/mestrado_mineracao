@@ -1,0 +1,21 @@
+Metric,Classifier,Statistic,P-value,Is Normal
+Accuracy,KNN,0.9674,0.866,True
+Accuracy,Decision Tree,0.9226,0.3789,True
+Accuracy,Random Forest,0.9513,0.6835,True
+Accuracy,XGBoost,0.92,0.3566,True
+Accuracy,LightGBM,0.9017,0.2289,True
+F1 Score,KNN,0.9664,0.8559,True
+F1 Score,Decision Tree,0.9171,0.3331,True
+F1 Score,Random Forest,0.9553,0.7316,True
+F1 Score,XGBoost,0.9203,0.3591,True
+F1 Score,LightGBM,0.9005,0.222,True
+Recall,KNN,0.9542,0.7187,True
+Recall,Decision Tree,0.8725,0.1069,True
+Recall,Random Forest,0.9484,0.6498,True
+Recall,XGBoost,0.9752,0.9348,True
+Recall,LightGBM,0.8781,0.1241,True
+ACSA,KNN,0.9442,0.6002,True
+ACSA,Decision Tree,0.928,0.4283,True
+ACSA,Random Forest,0.9343,0.4916,True
+ACSA,XGBoost,0.9436,0.5934,True
+ACSA,LightGBM,0.923,0.3828,True

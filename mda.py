@@ -29,7 +29,13 @@ st.sidebar.markdown("""
 # Sidebar menu
 menu = st.sidebar.selectbox(
     "Menu",
-    ["Análise Estatística", "Parâmetros dos Classificadores", "Análise de Custo x Benefício", "Balanceamento classes ADASYN", "Base Treino x Teste", "Explainable AI", "Downloads"]
+    ["Análise Estatística", 
+     "Parâmetros dos Classificadores",
+     "Desempenho dos modelos",
+     "Balanceamento classes ADASYN",
+     "Base Treino x Teste",
+     "Explainable AI",
+     "Downloads"]
 )
 
 # Add development information
@@ -57,6 +63,75 @@ def plot_heatmap(data, title):
     plt.title(title)
     return plt
 
+def show_parametros_classificadores():
+    st.title("Parâmetros dos Classificadores")
+    
+    st.markdown("""
+    ### Parâmetros Otimizados via Busca Bayesiana
+    
+    Os parâmetros dos classificadores foram otimizados utilizando a técnica de Busca Bayesiana (Bayesian Search), 
+    que é um método eficiente para otimização de hiperparâmetros. Esta técnica utiliza princípios bayesianos para 
+    guiar a busca pelos melhores parâmetros, sendo mais eficiente que a busca em grade tradicional.
+    """)
+
+    # Create tabs for each classifier
+    tab1, tab2, tab3, tab4, tab5 = st.tabs([
+        "KNN", 
+        "Decision Tree", 
+        "Random Forest", 
+        "XGBoost", 
+        "LightGBM"
+    ])
+
+    with tab1:
+        st.subheader("K-Nearest Neighbors (KNN)")
+        st.markdown("""
+        - **algorithm**: 'ball_tree'
+        - **leaf_size**: 20
+        - **n_neighbors**: 1
+        - **weights**: 'distance'
+        """)
+
+    with tab2:
+        st.subheader("Decision Tree")
+        st.markdown("""
+        - **criterion**: 'gini'
+        - **max_depth**: 10
+        - **min_samples_leaf**: 1
+        - **min_samples_split**: 2
+        """)
+
+    with tab3:
+        st.subheader("Random Forest")
+        st.markdown("""
+        - **max_depth**: 10
+        - **max_features**: 'sqrt'
+        - **min_samples_leaf**: 1
+        - **min_samples_split**: 2
+        - **n_estimators**: 11
+        """)
+
+    with tab4:
+        st.subheader("XGBoost")
+        st.markdown("""
+        - **colsample_bytree**: 1.0
+        - **learning_rate**: 0.3
+        - **max_depth**: 8
+        - **n_estimators**: 200
+        - **subsample**: 1.0
+        """)
+
+    with tab5:
+        st.subheader("LightGBM")
+        st.markdown("""
+        - **colsample_bytree**: 1.0
+        - **learning_rate**: 0.3
+        - **min_child_samples**: 10
+        - **n_estimators**: 200
+        - **num_leaves**: 20
+        - **subsample**: 0.5
+        """)
+
 if menu == "Análise Estatística":
     st.header("Resultados das Análises Estatísticas")
     
@@ -64,8 +139,19 @@ if menu == "Análise Estatística":
         # Load data
         friedman_results, nemenyi_accuracy, nemenyi_f1, nemenyi_recall, nemenyi_acsa, _, _, _ = load_data()
         
-        # Display Friedman results with full P-value precision
-        st.subheader("Resultados do Teste de Friedman")
+        # 1. Teste de Normalidade
+        st.subheader("1. Teste de Normalidade")
+        st.markdown("""
+        O teste de Shapiro-Wilk foi aplicado para verificar a normalidade dos dados. Os resultados indicaram que:
+        
+        - Os dados **não seguem uma distribuição normal** (Rejeitamos a hipótese nula)
+        - O teste foi aplicado na feature 'f9' da base de dados
+        
+        Isso justifica o uso de testes não-paramétricos (Friedman e Nemenyi) para a análise estatística dos resultados.
+        """)
+        
+        # 2. Teste de Friedman
+        st.subheader("2. Teste de Friedman")
         
         # Format P-value to show all decimal places
         friedman_results_formatted = friedman_results.copy()
@@ -74,8 +160,8 @@ if menu == "Análise Estatística":
         # Display formatted results
         st.dataframe(friedman_results_formatted)
         
-        # Display Nemenyi results with tabs
-        st.subheader("Resultados do Teste de Nemenyi")
+        # 3. Teste pos-hoc de Nemenyi
+        st.subheader("3. Teste pos-hoc de Nemenyi")
         tab1, tab2, tab3, tab4 = st.tabs(["Accuracy", "F1 Score", "Recall", "ACSA"])
         
         with tab1:
@@ -94,248 +180,107 @@ if menu == "Análise Estatística":
         st.error(f"Erro ao carregar os dados: {str(e)}")
 
 elif menu == "Parâmetros dos Classificadores":
-    st.header("Parâmetros dos Classificadores")
-    
-    try:
-        # Load performance metrics
-        _, _, _, _, _, performance_metrics, _, _ = load_data()
-        
-        # Dictionary with classifier parameters and optimization info
-        classifiers = {
-            'KNN': {
-                'params': {
-                    'n_neighbors': 1,
-                    'p': 1,
-                    'weights': 'uniform'
-                },
-                'optimization': 'Bayesian Search',
-                'default_desc': None,  # Não necessário pois está otimizado
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'KNN', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'KNN', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'SVM': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                - kernel='rbf' (Função de kernel Gaussiana)
-                - C=1.0 (Parâmetro de regularização)
-                - gamma='scale' (Coeficiente do kernel)
-                - probability=True (Habilita estimativas de probabilidade)
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'SVM', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'SVM', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'Decision Tree': {
-                'params': {
-                    'criterion': 'entropy',
-                    'max_depth': 36,
-                    'min_samples_leaf': 1,
-                    'min_samples_split': 2
-                },
-                'optimization': 'Bayesian Search',
-                'default_desc': None,  # Não necessário pois está otimizado
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Decision Tree', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Decision Tree', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'LVQ': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                - n_neighbors=3 (Número de vizinhos)
-                - weights='distance' (Ponderação por distância)
-                - prototypes_per_class=3 (Protótipos por classe)
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'LVQ', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'LVQ', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'MLP': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                - hidden_layer_sizes=(100,) (Uma camada oculta com 100 neurônios)
-                - activation='relu' (Função de ativação ReLU)
-                - solver='adam' (Otimizador Adam)
-                - learning_rate='constant' (Taxa de aprendizado constante)
-                - max_iter=200 (Máximo de iterações)
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'MLP', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'MLP', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'Ensemble Neural Network': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                Conjunto de 3 MLPs com:
-                - hidden_layer_sizes=(100,) (Uma camada oculta com 100 neurônios)
-                - activation='relu' (Função de ativação ReLU)
-                - solver='adam' (Otimizador Adam)
-                - max_iter=200 (Máximo de iterações)
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Ensemble Neural Network', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Ensemble Neural Network', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'Stacking': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                Meta-classificador: Regressão Logística com:
-                - C=1.0 (Parâmetro de regularização)
-                - solver='lbfgs' (Otimizador LBFGS)
-                - max_iter=100 (Máximo de iterações)
-                
-                Classificadores base:
-                - Random Forest
-                - SVM
-                - KNN
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Stacking', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Stacking', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'Random Forest': {
-                'params': {
-                    'max_depth': 28,
-                    'n_estimators': 97
-                },
-                'optimization': 'Optuna',
-                'default_desc': None,  # Não necessário pois está otimizado
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Random Forest', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'Random Forest', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'XGBoost': {
-                'params': {
-                    'objective': 'binary:logistic',
-                    'enable_categorical': False,
-                    'eval_metric': 'logloss',
-                    'learning_rate': 0.09504317284612004,
-                    'max_depth': 6,
-                    'n_estimators': 188
-                },
-                'optimization': 'Optuna',
-                'default_desc': None,  # Não necessário pois está otimizado
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'XGBoost', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'XGBoost', 'Memory Usage (MB)'].values[0]
-                }
-            },
-            'LightGBM': {
-                'params': 'Parâmetros padrão',
-                'optimization': 'Nenhuma otimização',
-                'default_desc': """
-                - learning_rate=0.1 (Taxa de aprendizado)
-                - n_estimators=100 (Número de árvores)
-                - max_depth=-1 (Profundidade máxima ilimitada)
-                - num_leaves=31 (Número máximo de folhas)
-                - min_child_samples=20 (Amostras mínimas por nó folha)
-                - objective='binary' (Objetivo para classificação binária)
-                """,
-                'performance': {
-                    'training_time': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'LightGBM', 'Training Time (s)'].values[0],
-                    'memory_usage': performance_metrics.loc[performance_metrics['Unnamed: 0'] == 'LightGBM', 'Memory Usage (MB)'].values[0]
-                }
-            }
-        }
-        
-        # Create tabs for each classifier
-        tabs = st.tabs(list(classifiers.keys()))
-        
-        # Display information in each tab
-        for tab, (classifier_name, info) in zip(tabs, classifiers.items()):
-            with tab:
-                st.subheader(f"{classifier_name}")
-                
-                # Display optimization method
-                st.markdown(f"**Método de Otimização:** {info['optimization']}")
-                
-                # Display parameters
-                st.markdown("**Parâmetros:**")
-                if isinstance(info['params'], dict):
-                    for param, value in info['params'].items():
-                        st.write(f"- {param}: {value}")
-                else:
-                    st.write(info['params'])
-                    if info['default_desc']:
-                        st.markdown("**Descrição dos Parâmetros Padrão:**")
-                        st.markdown(info['default_desc'])
-                
-                # Display performance metrics
-                st.markdown("**Métricas de Desempenho:**")
-                st.write(f"- Tempo de Treinamento: {info['performance']['training_time']:.2f} segundos")
-                st.write(f"- Uso de Memória: {info['performance']['memory_usage']:.2f} MB")
-    except Exception as e:
-        st.error(f"Erro ao carregar os dados: {str(e)}")
+    show_parametros_classificadores()
 
-elif menu == "Análise de Custo x Benefício":
-    st.header("Análise de Custo x Benefício dos Classificadores")
+elif menu == "Desempenho dos modelos":
+    st.title("Desempenho dos Modelos")
     
     try:
-        # Load performance metrics
-        _, _, _, _, _, performance_metrics, _, _ = load_data()
+        # Load performance data
+        df = pd.read_excel('results_antes_apos_otimizacao.xlsx')
         
-        # Criar DataFrame com métricas de desempenho
-        cost_benefit_df = pd.DataFrame({
-            'Classificador': performance_metrics['Unnamed: 0'],
-            'Tempo de Treinamento (s)': performance_metrics['Training Time (s)'].round(2),
-            'Uso de Memória (MB)': performance_metrics['Memory Usage (MB)'].round(2),
-            'Accuracy': performance_metrics['Accuracy'].round(4),
-            'F1 Score': performance_metrics['F1 Score'].round(4),
-            'Recall': performance_metrics['Recall'].round(4),
-            'ACSA': performance_metrics['ACSA'].round(4)
-        })
+        # Get the number of models (half of the rows since we have before/after for each)
+        n_models = len(df) // 2
         
-        # Exibir tabela com todas as métricas
-        st.subheader("Tabela Comparativa")
-        st.dataframe(cost_benefit_df.style.highlight_max(axis=0, color='lightgreen', subset=['Accuracy', 'F1 Score', 'Recall', 'ACSA'])
-                                        .highlight_min(axis=0, color='lightpink', subset=['Tempo de Treinamento (s)', 'Uso de Memória (MB)']))
+        # Separate data before and after optimization
+        df_antes = df.iloc[:n_models]
+        df_depois = df.iloc[n_models:]
         
-        # Criar gráficos
-        st.subheader("Visualizações")
+        # Create tabs for different views
+        tab1, tab2 = st.tabs(["Métricas de Performance", "Recursos Computacionais"])
         
-        # Criar duas colunas para os gráficos
-        col1, col2 = st.columns(2)
-        
-        with col1:
-            # Gráfico de Tempo de Treinamento
-            fig_time = plt.figure(figsize=(10, 6))
-            plt.barh(cost_benefit_df['Classificador'], cost_benefit_df['Tempo de Treinamento (s)'])
-            plt.title('Tempo de Treinamento por Classificador')
-            plt.xlabel('Tempo (segundos)')
-            plt.ylabel('Classificador')
-            st.pyplot(fig_time)
-        
-        with col2:
-            # Gráfico de Uso de Memória
-            fig_memory = plt.figure(figsize=(10, 6))
-            plt.barh(cost_benefit_df['Classificador'], cost_benefit_df['Uso de Memória (MB)'])
-            plt.title('Uso de Memória por Classificador')
-            plt.xlabel('Memória (MB)')
-            plt.ylabel('Classificador')
-            st.pyplot(fig_memory)      
+        with tab1:
+            st.subheader("Métricas de Performance antes e após otimização")
+            
+            # Create a comparison table
+            comparison_df = pd.DataFrame({
+                'Modelo': df_depois['Modelo'],
+                'Accuracy Antes': df_antes['Accuracy'].round(4),
+                'Accuracy Depois': df_depois['Accuracy'].round(4),
+                'F1 Score Antes': df_antes['F1 Score'].round(4),
+                'F1 Score Depois': df_depois['F1 Score'].round(4),
+                'Recall Antes': df_antes['Recall'].round(4),
+                'Recall Depois': df_depois['Recall'].round(4),
+                'ACSA Antes': df_antes['ACSA'].round(4),
+                'ACSA Depois': df_depois['ACSA'].round(4)
+            })
+            
+            # Display the comparison table with highlighting
+            st.dataframe(comparison_df.style.highlight_max(axis=0, subset=[col for col in comparison_df.columns if col != 'Modelo']))
+            
+        with tab2:
+            st.subheader("Recursos Computacionais")
+            
+            # Create two columns for the graphs
+            col1, col2 = st.columns(2)
+            
+            with col1:
+                # Processing Time Comparison
+                fig_time = plt.figure(figsize=(10, 6))
+                x = np.arange(len(df_antes['Modelo']))
+                width = 0.35
                 
-        # Adicionar algumas observações
-        st.subheader("Observações")
-        st.markdown("""
-        - Os valores em verde na tabela indicam os melhores resultados para métricas de desempenho (Accuracy, F1 Score, Recall, ACSA)
-        - Os valores em rosa na tabela indicam os menores valores para métricas de custo (Tempo de Treinamento, Uso de Memória)
-        """)
-        
+                plt.bar(x - width/2, df_antes['Training Time (s)'], width, label='Antes', color='lightcoral')
+                plt.bar(x + width/2, df_depois['Training Time (s)'], width, label='Depois', color='lightgreen')
+                
+                plt.xlabel('Modelos')
+                plt.ylabel('Tempo (segundos)')
+                plt.title('Tempo de Processamento: Antes vs Depois da Otimização')
+                plt.xticks(x, df_antes['Modelo'], rotation=45, ha='right')
+                plt.legend()
+                plt.tight_layout()
+                
+                st.pyplot(fig_time)
+                
+            with col2:
+                # Memory Usage Comparison
+                fig_memory = plt.figure(figsize=(10, 6))
+                
+                plt.bar(x - width/2, df_antes['Memory Usage (MB)'], width, label='Antes', color='lightcoral')
+                plt.bar(x + width/2, df_depois['Memory Usage (MB)'], width, label='Depois', color='lightgreen')
+                
+                plt.xlabel('Modelos')
+                plt.ylabel('Memória (MB)')
+                plt.title('Uso de Memória: Antes vs Depois da Otimização')
+                plt.xticks(x, df_antes['Modelo'], rotation=45, ha='right')
+                plt.legend()
+                plt.tight_layout()
+                
+                st.pyplot(fig_memory)
+            
+            # Add observations
+            st.markdown("""
+            ### Observações:
+            - As barras em vermelho claro representam o desempenho antes da otimização
+            - As barras em verde claro representam o desempenho após a otimização
+            - O tempo de processamento é medido em segundos
+            - O uso de memória é medido em Megabytes (MB)
+            """)
+            
+            # Display raw data in expandable section
+            with st.expander("Ver dados brutos"):
+                col1, col2 = st.columns(2)
+                with col1:
+                    st.subheader("Antes da Otimização")
+                    st.dataframe(df_antes)
+                with col2:
+                    st.subheader("Após a Otimização")
+                    st.dataframe(df_depois)
+            
     except Exception as e:
         st.error(f"Erro ao carregar os dados: {str(e)}")
+        st.error("Estrutura do DataFrame:")
+        st.write(df.head())
 
 elif menu == "Balanceamento classes ADASYN":
     st.header("Balanceamento de Classes usando ADASYN")
@@ -386,9 +331,9 @@ elif menu == "Explainable AI":
         # Display KNN parameters
         st.markdown("### KNN Parameters")
         st.markdown("""
-        - n_neighbors: 1
-        - weights: uniform
-        - p: 1 (Manhattan distance)
+        - **n_neighbors**: 1
+        - **weights**: 'uniform'
+        - **p**: 1 (Manhattan distance)
         """)
         
         # Display LIME results image
@@ -400,12 +345,12 @@ elif menu == "Explainable AI":
         # Display XGBoost parameters
         st.markdown("### XGBoost Parameters")
         st.markdown("""
-        - objective: binary:logistic
-        - enable_categorical: False
-        - eval_metric: logloss
-        - learning_rate: 0.09504
-        - max_depth: 6
-        - n_estimators: 188
+        - **objective**: binary:logistic
+        - **enable_categorical**: False
+        - **eval_metric**: logloss
+        - **learning_rate**: 0.09504
+        - **max_depth**: 6
+        - **n_estimators**: 188
         """)
         
         # Display LIME results image
